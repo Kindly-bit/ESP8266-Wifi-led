@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>WEB LED</title>
+    <script src="/vue.min.js"></script>
+    <style type="text/css">
+        #app{
+            width: auto;
+        }
+        button{
+            margin:  0 250;
+            width: 300px;
+            height: 300px;
+            font-size: 150px;
+        }
+        head{
+        margin: 0 250;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    <h1 class = "head">led Control</h1>
+    <button class = "button" v-on:click="clk"> {{ message }}</button>
+    <!-- <input id="sendTxt" type="text" /> -->
+    <!-- <button id="sendBtn">发送</button> -->
+    <div id="recv"></div>
+    </div>
+    <script type="text/javascript">
+        var websocket = new WebSocket("ws://192.168.1.1:8080");
+
+        websocket.onopen = function () {
+            console.log('websocket open');
+            document.getElementById('recv').innerHTML = 'Connected';
+        }
+
+        websocket.onclose = function () {
+            console.log('websocket close');
+        }
+
+        websocket.onmessage = function (event) {
+            console.log(event.data);
+            // document.getElementById('recv').innerHTML = event.data;
+        }
+
+        // document.getElementById('sendBtn').onclick = function () {
+            // var txt = document.getElementById('sendTxt').value;
+            // websocket.send(txt);
+
+        // }
+    </script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: "开"
+            },
+            methods: {
+            clk: function (event) {
+               if( this.message== "开") {
+                   this.message= "关";
+                   websocket.send("on");
+                }
+
+               else {
+                   this.message= "开";
+                    websocket.send("off");
+                }
+            // `this` 在方法里指当前 Vue 实例
+            // alert('Hello ' + this.name + '!')
+            // `event` 是原生 DOM 事件
+            // if (event) {
+            // alert(event.target.tagName)
+            }
+            
+            }
+        })
+    </script>
+</body>
+
+</html>

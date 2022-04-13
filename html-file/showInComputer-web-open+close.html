@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .out {
+            height: 700px;
+            position: relative;
+            background-color: LightCyan;
+            border: 1px solid #FFF;
+        }
+
+        .in-box {
+            height: 300px;
+            width: 300px;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -150px;
+            position: absolute;
+            line-height: 100px;
+        }
+
+        .time {
+            font-size: 25px;
+        }
+
+        .head {
+            text-align: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: Center;
+            /*水平居中*/
+            margin: 0 auto;
+            /*垂直居中*/
+        }
+
+        .a {
+            text-decoration: none;
+        }
+
+        .button1 {
+            width: 150px;
+            height: 150px;
+            font-weight: 600;
+            font-size: 35px;
+            color: darkcyan;
+            border: 9px solid darkcyan;
+            background: LightCyan;
+            border-radius: 50%;
+        }
+
+        .close {
+            color: LightCyan;
+            border: 9px solid darkcyan;
+            background: darkcyan;
+        }
+
+        .disappear {
+            display: none;
+        }
+
+        .space {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class=" out">
+        <div class="in-box">
+            <span class='center  time' id='time1'> Time Loading ......</span>
+            <script>
+                setInterval('time1.innerHTML=new Date().toLocaleString()', 1000);
+            </script>
+            <h1 class="head center">led Control</h1>
+            <!-- <a href='./pin?light1=1' class='a'> -->
+                <button type='button' class='button1 center ' id='open'>开灯</button>
+            <!-- </a> -->
+            <!-- <a href='./pin?light1=0' class='a'> -->
+                <button id='close' type='button' class='button1 center  close disappear'>关灯</button>
+            <!-- </a> -->
+        </div>
+    </div>
+</body>
+<script>
+    var open = document.getElementById('open');
+    var close = document.getElementById('close');
+    open.onclick = function () {
+        close.className = 'button1 center close ';
+        open.className = 'button1 center  disappear';
+    }
+    close.onclick = function () {
+        close.className = 'button1 center close disappear';
+        open.className = 'button1 center ';
+    }
+</script>
+
+</html>
+<!-- <script>
+        window.onload = function () {
+            // dcw = document.body.clientWidth;
+
+            // dch = document.body.clientHeight;
+            // dch = window.innerHeight;
+            // console.log(dch)
+            // var obj = document.getElementById(  box1");
+            // obj.style.height= dch+ "px";
+            // var obj = document.getElementById("box2");
+            // obj.style.height= dch/4+ "px";
+        }
+    </script> -->
